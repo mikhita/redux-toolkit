@@ -3,9 +3,10 @@ import { vote } from './reducers/anecdoteReducer'
 import NewAnecdote from './components/AnecdoteForm'
 
 const App = () => {
-  const anecdotes = useSelector(state => state)
+  // const anecdotes = useSelector(state => state)
   const dispatch = useDispatch()
-  const sortedAnecdotes = anecdotes.sort((a, b) => b.votes - a.votes);
+  const sortedAnecdotes = useSelector(state => state.sort((a, b) => b.votes - a.votes));  
+  // const sortedAnecdotes = anecdotes.sort((a, b) => b.votes - a.votes);
 
   
 
