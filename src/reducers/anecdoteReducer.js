@@ -1,3 +1,6 @@
+import { combineReducers } from 'redux'
+import filterReducer from './filterReducer'
+
 export const getId = () => (100000 * Math.random()).toFixed(0)
 
 const anecdotesAtStart = [
@@ -20,7 +23,7 @@ const asObject = (anecdote) => {
 
 const initialState = anecdotesAtStart.map(asObject)
 
-const reducer = (state = initialState, action) => {
+export const anecdoteRreducer = (state = initialState, action) => {
   switch(action.type) {
     case 'NEW_ANECDOTE':
       return [...state, action.payload]
@@ -38,6 +41,11 @@ const reducer = (state = initialState, action) => {
       return state
     }
 }
+
+const rootReducer = combineReducers({
+  anecdotes: anecdoteRreducer,
+  filter: filterReducer
+})
 
 export const createAnecdote = (content) => {
   return {
@@ -57,4 +65,4 @@ export const vote = (id) => {
   }
 }  
 
-export default reducer
+export default rootReducer
