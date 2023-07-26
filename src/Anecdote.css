@@ -1,0 +1,39 @@
+.anecdote-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.anecdote-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms, transform 500ms;
+}
+
+.anecdote-exit {
+  opacity: 1;
+}
+
+.anecdote-exit-active {
+  opacity: 0;
+  transition: opacity 500ms;
+}
+
+.anecdote-item {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Newly added styles for the voted anecdote */
+.anecdote-item.voted {
+  background-color: #eff8ff;
+  font-weight: bold;
+}
+
+.anecdote-item.voted .votes {
+  transition: all 0.5s;
+}

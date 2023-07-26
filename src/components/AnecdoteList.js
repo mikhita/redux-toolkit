@@ -1,40 +1,44 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { vote } from '../reducers/anecdoteReducer'
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { vote } from '../reducers/anecdoteReducer';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import '../Anecdote.css'; 
 
 const AnecdoteList = () => {
-  // const anecdotes = useSelector(state => state)
-  const dispatch = useDispatch()
-  const anecdotes = useSelector(state => {
+  const dispatch = useDispatch();
+  const anecdotes = useSelector((state) => {
     const filter = state.filter;
-    const filteredAnecdotes = state.anecdotes.filter(anecdote =>
+    const filteredAnecdotes = state.anecdotes.filter((anecdote) =>
       anecdote.content.toLowerCase().includes(filter.toLowerCase())
     );
     const sortedAnecdotes = filteredAnecdotes.sort((a, b) => b.votes - a.votes);
     return sortedAnecdotes;
   });
-  
-  
-  // const sortedAnecdotes = anecdotes.sort((a, b) => b.votes - a.votes);
 
-  
+  const handleVote = (id) => {
+    setTimeout(() => {
+      dispatch(vote(id));
+    }, 500);
+  };
 
   return (
     <div>
       <h2>Anecdotes</h2>
-      {anecdotes.map(anecdote => (
-      <div key={anecdote.id}>
-        <div>{anecdote.content}</div>
-        <div>
-          has {anecdote.votes}
-          <button onClick={() => dispatch(vote(anecdote.id))}>vote</button>
-        </div>
-      </div>
-    ))}
+      <TransitionGroup>
+        {anecdotes.map((anecdote) => (
+          <CSSTransition key={anecdote.id} timeout={500} classNames="anecdote">
+            <div className="anecdote-item">
+              <div>{anecdote.content}</div>
+              <div>
+                has {anecdote.votes}
+                <button onClick={() => handleVote(anecdote.id)}>vote</button>
+              </div>
+            </div>
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
     </div>
-  )
-}
+  );
+};
 
-export default AnecdoteList
-
-
-
+export default AnecdoteList;

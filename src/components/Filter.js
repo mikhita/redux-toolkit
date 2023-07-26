@@ -19,3 +19,5 @@ const Filter = (props) => {
 };
 
 export default connect(null, { setFilter })(Filter);
+
+
