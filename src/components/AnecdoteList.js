@@ -16,9 +16,9 @@ const AnecdoteList = () => {
   });
 
   const handleVote = (id) => {
-    setTimeout(() => {
+    
       dispatch(vote(id));
-    }, 500);
+    
   };
 
   return (
